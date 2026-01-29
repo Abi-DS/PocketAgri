@@ -1,0 +1,17 @@
+{
+  "name": "Internet Computer Development",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    }
+  },
+  "postCreateCommand": "sh -ci \"$(curl -fsSL https://internetcomputer.org/install.sh)\" && dfx --version",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dfinity-foundation.vscode-motoko"
+      ]
+    }
+  }
+}

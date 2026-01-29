@@ -1,0 +1,4 @@
+tasks:
+  - name: Install dfx
+    init: sh -ci "$(curl -fsSL https://internetcomputer.org/install.sh)"
+    command: dfx --version
