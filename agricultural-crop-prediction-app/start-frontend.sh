@@ -3,7 +3,7 @@
 echo "=== Starting Frontend ==="
 echo ""
 
-cd /workspaces/PocketAgri/agricultural-crop-prediction-app/build-template/src/frontend
+cd /workspaces/PocketAgri/agricultural-crop-prediction-app/frontend
 
 # Check if node_modules exists
 if [ ! -d "node_modules" ]; then

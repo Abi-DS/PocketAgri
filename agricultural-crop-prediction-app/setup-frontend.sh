@@ -4,7 +4,7 @@ echo "=== Setting Up Frontend ==="
 echo ""
 
 # Navigate to frontend directory
-cd /workspaces/PocketAgri/agricultural-crop-prediction-app/build-template/src/frontend
+cd /workspaces/PocketAgri/agricultural-crop-prediction-app/frontend
 
 if [ ! -f "package.json" ]; then
     echo "Error: package.json not found!"
@@ -27,7 +27,7 @@ echo ""
 echo "=== Frontend Setup Complete ==="
 echo ""
 echo "To start the frontend, run:"
-echo "  cd /workspaces/PocketAgri/agricultural-crop-prediction-app/build-template/src/frontend"
+echo "  cd /workspaces/PocketAgri/agricultural-crop-prediction-app/frontend"
 echo "  npm start"
 echo ""
 echo "The frontend will start on port 3000"
