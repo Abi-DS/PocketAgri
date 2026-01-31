@@ -161,3 +161,34 @@ export const createActor = (canisterId: string, options?: { agent?: any }) => {
   const agent = options?.agent || new (require('@dfinity/agent').HttpAgent)({ host: 'http://127.0.0.1:8080' });
   return require('@dfinity/agent').Actor.createActor(idlFactory, { agent, canisterId });
 };
+
+// Runtime helper for ExternalBlob used by the frontend components.
+// Provides a small implementation that converts bytes to a base64 data URL
+// and exposes helper methods expected by the UI (withUploadProgress, getDirectURL).
+export const ExternalBlob = {
+  fromBytes: (bytes: Uint8Array) => {
+    function bytesToBase64(b: Uint8Array) {
+      let binary = '';
+      const len = b.length;
+      for (let i = 0; i < len; i++) binary += String.fromCharCode(b[i]);
+      if (typeof btoa === 'function') return btoa(binary);
+      // Fallback for Node (used during SSR/builds)
+      return Buffer.from(b).toString('base64');
+    }
+
+    const b64 = bytesToBase64(bytes as Uint8Array);
+    const obj: any = {
+      id: BigInt(Date.now()),
+      url: `data:image/jpeg;base64,${b64}`,
+      contentType: 'image/jpeg',
+      size: BigInt(bytes.length),
+      withUploadProgress: (fn: (n: number) => void) => {
+        try { fn(100); } catch (e) { /* ignore */ }
+        return obj;
+      },
+      getDirectURL: () => obj.url,
+    };
+
+    return obj as unknown as ExternalBlob;
+  },
+};
